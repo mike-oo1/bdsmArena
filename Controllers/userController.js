@@ -20,17 +20,24 @@ exports.signUp =async(req,res)=>{
             PhoneNumber
         }
 // validating the fields
-     if(!FirstName||!LastName ||!Email|| Password.length!==8|| !PhoneNumber||PhoneNumber.length!==14){
+     if(!FirstName||!LastName ||!Email||!Password||!PhoneNumber){
          return res.status(400).json({
-            message:"field cant be left empty",
-            message:"invalid phone number",
-            message:"password must be 8 characters",
+            message:"field cant be left empty"
+           
             // message:"password must have a special character"
          })            
         }else if(checkMail){
             return res.status(300).json({
                 message:`this email  ${Email} is associated with a bdsm arena account, please use a unique email`
             })
+        }else if(PhoneNumber.length < 6 || PhoneNumber.length>14 ){
+            return res.status(400).json({
+                message: "phone number must be a min of 6 and a max 0f 14"
+            })
+        }else if(Password.length<8|Password.length>20){
+            return res.status(400).json( {
+                message:"password must be a minimum of 8 characters and a minimum of 20 characters"
+            } )
         }
             const createdUser =await new userModel(data)    
             // generating a token for user

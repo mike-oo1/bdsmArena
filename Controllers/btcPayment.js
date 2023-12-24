@@ -67,7 +67,7 @@ exports.BtcPayment = async(req,res)=>{
             res.status (400).json({
                 message:`pls your total is  $ ${totalPrice} pls pay with gift instead`
             })
-                   
+                    
         }else{
             res.status(200).json({
                 message:"here is the total of your order",
